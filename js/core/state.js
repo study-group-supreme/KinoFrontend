@@ -5,5 +5,6 @@ const state = {
             : window.location.origin,
 
     selectedMovieId: null,
-    movies: []
+    movies: [],
+    showings: []
 };
