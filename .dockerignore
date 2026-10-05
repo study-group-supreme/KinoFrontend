@@ -1,6 +1,5 @@
 .git/
 .idea/
 Dockerfile
-nginx/
 *.md
 project_context*.txt
