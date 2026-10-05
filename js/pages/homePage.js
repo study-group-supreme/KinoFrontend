@@ -12,6 +12,8 @@ async function renderHome() {
         <h1>Film i biografen</h1>
         ${movieHtml}
     `;
+
+
 }
 
 function selectMovie(id) {
