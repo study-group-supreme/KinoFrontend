@@ -1,6 +1,6 @@
-async function renderMovie()  {
-    let movieId = state.selectedMovieId;
-    let showing = await apiGet(`${state.apiBaseUrl}/api/showings/${movieId}`);
+async function renderMovie() {
+    let movie = state.movies.find(m => m.id === state.selectedMovieId);
+    let showing = await apiGet(`${state.apiBaseUrl}/api/showings/${state.selectedMovieId}`);
 
     let showingHtml = showing.map(movie => `
         <button onclick="selectShowing(${showing.id})">
@@ -10,17 +10,18 @@ async function renderMovie()  {
 
     document.getElementById("app").innerHTML = `
         <h1>${movie.name}</h1>
-         <p>${movie.description || "Ingen beskrivelse"}</p>
+         <p>${movie.description || "No description"}</p>
         <p>Runtime: ${movie.runTimeMinutes} min</p>
+        <p>Age limit ${movie.ageLimit}</p>
+        <img src="${movie.posterUrl}" alt="Poster coming soon">
+        ${showingHtml}
         
-    `;
-    // find filmen i state
-    let movie = state.movies.find(m => m.id === movieId);
+        <button onclick="location.hash='home'">Back</button>
 
-    document.getElementById("app").innerHTML = `
-        <h1>${movie.name}</h1>
-        <p>${movie.description || "Ingen beskrivelse"}</p>
-
-        <button onclick="location.hash='home'">Tilbage</button>
     `;
+}
+
+function selectShowing(id) {
+    state.selectedShowingId = id;
+    location.hash = "showing";
 }

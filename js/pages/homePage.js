@@ -9,8 +9,10 @@ async function renderHome() {
     `).join("<br>");
 
     document.getElementById("app").innerHTML = `
-        <h1>Film i biografen</h1>
-        ${movieHtml}
+        <h1>Movies</h1>
+        <p></p>
+               
+${movieHtml}
     `;
 
 
