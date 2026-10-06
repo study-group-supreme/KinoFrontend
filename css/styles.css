@@ -22,6 +22,10 @@
     flex-wrap: wrap;
     gap: 16px;
 }
-button:disabled{
-    color: red;
+
+.reserved{
+    background-color: red;
+}
+.available{
+    background-color: green;
 }

@@ -1,13 +1,14 @@
+//RenderPage
 async function renderReservation() {
     if (!state.selectedShowingId) {
         location.hash = "home";
         return;
     }
-
+//Hente sæder
     const seats = await apiGet(
         `${state.apiBaseUrl}/api/seat/showing/${state.selectedShowingId}`
     ) || [];
-
+//Lave html
     document.getElementById("app").innerHTML = `
         <h1>Reserve ticket</h1>
 
@@ -26,29 +27,33 @@ async function renderReservation() {
 
         <p id="message"></p>
     `;
-
+//Lytter til submit knap
     document.getElementById("reserve-btn").addEventListener("click", submitReservation);
-
+//Lytter til back knap
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "movie";
     });
 }
 
+//Vælge sæde, når man klikker på sæde gemmer selectSeat sæde it i staten.
 function seatItem(seat) {
-    return `
-        <button onclick="selectSeat(${seat.id})" ${seat.taken ? "disabled" : ""}>
+    let color = !seat.taken ? "available" : "reserved";
+    let btn = `
+        <button class="${color}" onclick="selectSeat(${seat.id})" ${seat.taken ? "disabled" : ""}>
             ${seat.row}${seat.number}
-        </button>
-    `;
+        </button>`
+    return btn;
 }
 
+//Gemmer sæde id i staten
 function selectSeat(id) {
     state.selectedSeatId = id;
 }
 
+//Tryk på reserver bliver den her kaldt
 async function submitReservation() {
     const message = document.getElementById("message");
-
+//Hvis der ikke har været et sæde gemt i state, skriv besked til bruger
     if (!state.selectedSeatId) {
         message.textContent = "Choose a seat.";
         return;
@@ -71,4 +76,6 @@ async function submitReservation() {
     }
 
     message.textContent = "Ticket reserved!";
+    state.selectedSeatId = null;
+    await renderReservation();
 }
