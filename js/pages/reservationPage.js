@@ -4,57 +4,52 @@ async function renderReservation() {
         return;
     }
 
-    state.selectedSeatId = null;
+    const seats = await apiGet(
+        `${state.apiBaseUrl}/api/seat/showing/${state.selectedShowingId}`
+    ) || [];
 
     document.getElementById("app").innerHTML = `
         <h1>Reserve ticket</h1>
+
         <input id="customerName" placeholder="Name"><br>
         <input id="customerPhone" placeholder="Phone"><br>
         <input id="customerMail" placeholder="Email"><br>
 
         <h2>Choose seat</h2>
-        <div id="seat-list" class="seat-list"></div>
 
-        <button onclick="submitReservation()">Reserve</button>
-        <button onclick="location.hash='movie'">Back</button>
+        <div id="seat-list">
+            ${seats.map(seatItem).join("")}
+        </div>
+
+        <button id="reserve-btn">Reserve</button>
+        <button id="back-btn">Back</button>
+
         <p id="message"></p>
     `;
 
-    document.getElementById("seat-list").addEventListener("click", (e) => {
-        const button = e.target.closest("button[data-id]");
-        if (!button) return;
+    document.getElementById("reserve-btn").addEventListener("click", submitReservation);
 
-        state.selectedSeatId = Number(button.dataset.id);
-
-        document.querySelectorAll("#seat-list button")
-            .forEach(b => b.classList.remove("selected"));
-        button.classList.add("selected");
+    document.getElementById("back-btn").addEventListener("click", () => {
+        location.hash = "movie";
     });
-
-    await loadSeats();
-}
-
-async function loadSeats() {
-    const seats = await apiGet(
-        `${state.apiBaseUrl}/api/seat/showing/${state.selectedShowingId}`
-    ) || [];
-
-    document.getElementById("seat-list").innerHTML = seats.map(seatItem).join("");
 }
 
 function seatItem(seat) {
-    const selected = seat.id === state.selectedSeatId ? "selected" : "";
     return `
-        <button data-id="${seat.id}" class="${selected}" ${seat.taken ? "disabled" : ""}>
+        <button onclick="selectSeat(${seat.id})" ${seat.taken ? "disabled" : ""}>
             ${seat.row}${seat.number}
         </button>
     `;
 }
 
+function selectSeat(id) {
+    state.selectedSeatId = id;
+}
+
 async function submitReservation() {
     const message = document.getElementById("message");
 
-    if (state.selectedSeatId === null) {
+    if (!state.selectedSeatId) {
         message.textContent = "Choose a seat.";
         return;
     }
@@ -76,6 +71,4 @@ async function submitReservation() {
     }
 
     message.textContent = "Ticket reserved!";
-    state.selectedSeatId = null;
-    await loadSeats();
 }
