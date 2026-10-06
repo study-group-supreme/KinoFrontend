@@ -8,6 +8,11 @@ async function loadTicketTypes() {
     return ticketTypes;
 }
 
+async function renderTicketTypeSelection(container) {
+    const ticketTypes = await loadTicketTypes();
+    container.appendChild(createTicketTypeDropdown(ticketTypes));
+}
+
 function createTicketTypeDropdown(ticketTypes) {
     const select = document.createElement("select");
     select.id = "ticketTypeSelect";
@@ -16,7 +21,7 @@ function createTicketTypeDropdown(ticketTypes) {
     placeholder.value = "";
     placeholder.textContent = "Select ticket type";
     placeholder.disabled = true;
-    placeholder.selected = true
+    placeholder.selected = true;
     select.appendChild(placeholder);
 
     for (const ticketType of ticketTypes) {
