@@ -41,9 +41,9 @@ async function renderMovie() {
 function showingItem(showing) {
     return `
         <li class="showing-item" data-id="${showing.id}">
-            <time datetime="${showing.startTime}">
+            <p>
                 ${showing.startTime}
-            </time>
+            </p>
         </li>
     `;
 }
