@@ -35,7 +35,7 @@ async function renderReservation() {
     });
 }
 
-//Vælge sæde, når man klikker på sæde gemmer selectSeat sæde it i staten.
+//Hvis sæde er available, kan sæde trykkes på og er grøn, hvis ikke modsat og rød
 function seatItem(seat) {
     let color = !seat.taken ? "available" : "reserved";
     let btn = `
@@ -50,7 +50,6 @@ function selectSeat(id) {
     state.selectedSeatId = id;
 }
 
-//Tryk på reserver bliver den her kaldt
 async function submitReservation() {
     const message = document.getElementById("message");
 //Hvis der ikke har været et sæde gemt i state, skriv besked til bruger
@@ -64,7 +63,7 @@ async function submitReservation() {
         customerPhone: document.getElementById("customerPhone").value,
         customerMail: document.getElementById("customerMail").value
     };
-
+//Send reservation med post metode
     const result = await apiPost(
         `${state.apiBaseUrl}/api/reservation/${state.selectedShowingId}/${state.selectedSeatId}`,
         reservation
