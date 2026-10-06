@@ -10,6 +10,7 @@ async function renderHome() {
 
     document.getElementById("app").innerHTML = `
         <a href="#showings">See all showings</a>
+        <a href="#new-movie">New movie</a>
         <h1>Film i biografen</h1>
         ${movieHtml}
     `;
