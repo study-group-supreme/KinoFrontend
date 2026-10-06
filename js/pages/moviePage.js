@@ -4,6 +4,7 @@ async function renderMovie() {
 
     document.getElementById("app").innerHTML = `
         <article class="movie-details">
+                    <button id="back-btn">Back</button>
             <header>
                 <h1>${movie.name}</h1>
             </header>
@@ -23,7 +24,7 @@ async function renderMovie() {
                 </ul>
             </section>
 
-            <button id="back-btn">Back</button>
+
         </article>
     `;
 
@@ -42,7 +43,7 @@ function showingItem(showing) {
     return `
         <li class="showing-item" data-id="${showing.id}">
             <p>
-                ${showing.startTime}
+                ${showing.startTime.replace("T", " ")}
             </p>
         </li>
     `;
