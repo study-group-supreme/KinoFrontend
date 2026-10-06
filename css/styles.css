@@ -22,3 +22,6 @@
     flex-wrap: wrap;
     gap: 16px;
 }
+button:disabled{
+    color: red;
+}
