@@ -23,7 +23,7 @@ async function renderMovie() {
                 </ul>
             </section>
 
-            <button id="back-btn">Bak</button>
+            <button id="back-btn">Back</button>
         </article>
     `;
 
