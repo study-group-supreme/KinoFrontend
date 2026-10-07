@@ -22,3 +22,10 @@
     flex-wrap: wrap;
     gap: 16px;
 }
+
+.reserved{
+    background-color: red;
+}
+.available{
+    background-color: green;
+}
