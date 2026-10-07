@@ -22,7 +22,6 @@ async function renderMovie() {
                 <p><strong>Age limit:</strong> ${movie.ageLimit}</p>
             </section>
             
-            <button id="edit-button">Edit movie</button>
 
             <section class="showings">
                 <h2>Showtimes</h2>
