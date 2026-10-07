@@ -10,13 +10,20 @@ async function renderReservation() {
         `${state.apiBaseUrl}/api/seat/showing/${state.selectedShowingId}`
     ) || [];
 
+    const ticketTypes = await apiGet(
+        `${state.apiBaseUrl}/api/ticketType`
+    ) || [];
+
     // Lave html
     document.getElementById("app").innerHTML = `
         <h1>Reserve ticket</h1>
-
         <input id="customerName" placeholder="Name"><br>
         <input id="customerPhone" placeholder="Phone"><br>
         <input id="customerMail" placeholder="Email"><br>
+
+<select id="ticketType">
+${ticketTypes.map(ticketTypeItem).join("")}
+</select>
 
         <h2>Choose seat</h2>
 
@@ -48,9 +55,17 @@ function seatItem(seat) {
         </label>
     `;
 }
+function ticketTypeItem(ticketType) {
+    return `
+        <option value="${ticketType.id}">
+            ${ticketType.name} - ${ticketType.price} kr
+        </option>
+    `;
+}
 
 async function submitReservation() {
     const message = document.getElementById("message");
+    const ticketTypeId = document.getElementById("ticketType").value;
 
     // Find de afkrydsede sæder. Hvis der ingen er, skriv besked til bruger
     const checked = document.querySelectorAll("#seat-list input:checked");
@@ -76,7 +91,7 @@ async function submitReservation() {
 
     // Send reservation med post metode
     const result = await apiPost(
-        `${state.apiBaseUrl}/api/reservation/${state.selectedShowingId}?seatIds=${seatIds}`,
+        `${state.apiBaseUrl}/api/reservation/${state.selectedShowingId}?seatIds=${seatIds}&ticketTypeId=${ticketTypeId}`,
         reservation
     );
 

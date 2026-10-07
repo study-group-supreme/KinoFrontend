@@ -2,6 +2,7 @@ function navigate(page) {
     if (page === "home") renderHome();
     if (page === "movie") renderMovie();
     if(page ==="reservation") renderReservation();
+    if (page === "ticketType") renderTicketTypeSelection();
 }
 
 function router() {
