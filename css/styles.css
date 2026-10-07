@@ -1,26 +1,72 @@
+/* --- GLOBAL --- */
+h1, h2, h3 {
+    margin: 0 0 12px;
+}
+
+/* --- MOVIE LIST --- */
+#movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px;
+}
+
 .movie-card {
-    width: 140px;
     cursor: pointer;
     text-align: center;
+    border-radius: 10px;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
 }
 
 .movie-card img {
     width: 100%;
     aspect-ratio: 2 / 3;
     object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    transition: transform .25s ease;
 }
 
-.movie-card:hover {
-    transform: scale(1.04);
+/* --- MOVIE DETAILS PAGE --- */
+.movie-details {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
 }
 
-#movie-list {
+.movie-info {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.movie-poster {
+    width: 240px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.movie-info p {
+    margin: 6px 0;
+}
+
+/* --- SHOWINGS --- */
+.showings ul {
+    list-style: none;
+}
+
+.showing-item {
+    padding: 2px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: green;
+    width: max-content;
+}
+
+.showing-item:hover {
+    background-color: greenyellow;
 }
 
 .reserved{
