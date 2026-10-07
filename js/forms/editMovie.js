@@ -34,7 +34,7 @@ async function renderEditMovieForm() {
     document.getElementById("movie-activity").value = String(movie.active);
 
     document.getElementById("back-btn").addEventListener("click", () => {
-        location.hash = "home";
+        location.hash = "admin_home";
     });
 
     document.getElementById("edit-movie-form").addEventListener("submit", updateMovie)
@@ -55,7 +55,7 @@ async function updateMovie(event){
     const result = await apiPut(`${state.apiBaseUrl}/api/movies/${state.selectedMovieId}`, updatedMovie);
 
     if (result){
-        location.hash = "home";
+        location.hash = "admin_home";
     } else {
         document.getElementById("form-message").textContent = "Could not update movie";
     }
