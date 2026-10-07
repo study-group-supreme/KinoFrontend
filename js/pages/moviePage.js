@@ -1,6 +1,12 @@
 async function renderMovie() {
     const movie = state.movies.find(m => m.id === state.selectedMovieId);
-    const showings = await apiGet(`${state.apiBaseUrl}/api/showing/movie/${state.selectedMovieId}`);
+
+    if (!movie) {
+        location.hash = "home";
+        return;
+    }
+
+    const showings = await apiGet(`${state.apiBaseUrl}/api/showing/movie/${state.selectedMovieId}`) || [];
 
     document.getElementById("app").innerHTML = `
         <article class="movie-details">
@@ -51,5 +57,5 @@ function showingItem(showing) {
 
 function selectShowing(id) {
     state.selectedShowingId = id;
-    location.hash = "showing";
+    location.hash = "reservation";
 }

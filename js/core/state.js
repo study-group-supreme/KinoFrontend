@@ -6,5 +6,6 @@ const state = {
 
     selectedMovieId: null,
     selectedShowingId: null,
+    selectedSeatId: null,
     movies: []
 };

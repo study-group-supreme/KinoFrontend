@@ -68,3 +68,10 @@ h1, h2, h3 {
 .showing-item:hover {
     background-color: greenyellow;
 }
+
+.reserved{
+    background-color: red;
+}
+.available{
+    background-color: green;
+}
