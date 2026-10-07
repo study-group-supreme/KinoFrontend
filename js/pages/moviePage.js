@@ -41,10 +41,6 @@ async function renderMovie() {
         selectShowing(Number(li.dataset.id));
     });
 
-    document.getElementById("edit-button").addEventListener("click", () => {
-        state.selectedMovieId = movie.id;
-        location.hash = "editMovie";
-    });
 
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "home";
