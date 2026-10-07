@@ -1,5 +1,5 @@
 async function renderHome() {
-    const movies = await apiGet(`${state.apiBaseUrl}/api/movies`);
+    const movies = await apiGet(`${state.apiBaseUrl}/api/movies/available`);
     const categories = await apiGet(`${state.apiBaseUrl}/api/movies/categories`);
     state.movies = movies;
     state.categories = categories;
