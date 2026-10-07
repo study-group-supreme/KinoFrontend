@@ -7,6 +7,7 @@ function navigate(page) {
     if (page === "admin_home") renderAdminHomePage();
 
 
+    if (page === "ticketType") renderTicketTypeSelection();
 }
 
 function router() {

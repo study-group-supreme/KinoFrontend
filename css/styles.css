@@ -69,11 +69,32 @@ h1, h2, h3 {
     background-color: greenyellow;
 }
 
-.reserved{
-    background-color: red;
+#seat-list {
+    display: grid;
+    grid-template-columns: repeat(12, 3rem);
+    gap: 4px;
 }
-.available{
-    background-color: green;
+
+.seat input {
+    display: none;
+}
+
+.seat span {
+    display: block;
+    text-align: center;
+    border: 1px solid #888;
+    cursor: pointer;
+}
+
+.seat input:checked + span {
+    background: green;
+    color: white;
+}
+
+.seat input:disabled + span {
+    background: red;
+    color: white;
+    cursor: not-allowed;
 }
 
 .movie-table{
