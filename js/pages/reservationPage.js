@@ -39,7 +39,7 @@ async function renderReservation() {
     });
 }
 
-// Et afkrydsningsfelt pr. sæde. Optagede sæder er disabled
+//Sæde checkbox = checked. Sætter den til grøn med css. Sæde der er checked bliver reserveret bliver den sat til disable
 function seatItem(seat) {
     return `
         <label class="seat">
