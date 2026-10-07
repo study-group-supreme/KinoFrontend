@@ -75,3 +75,7 @@ h1, h2, h3 {
 .available{
     background-color: green;
 }
+
+.movie-table{
+    text-align: center;
+}

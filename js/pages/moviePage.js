@@ -23,7 +23,6 @@ async function renderMovie() {
                 <p><strong>Age limit:</strong> ${movie.ageLimit}</p>
             </section>
             
-            <button id="edit-button">Edit movie</button>
 
             <section class="showings">
                 <h2>Showtimes</h2>
@@ -42,10 +41,6 @@ async function renderMovie() {
         selectShowing(Number(li.dataset.id));
     });
 
-    document.getElementById("edit-button").addEventListener("click", () => {
-        state.selectedMovieId = movie.id;
-        location.hash = "editMovie";
-    });
 
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "home";
