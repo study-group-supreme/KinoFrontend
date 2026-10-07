@@ -21,6 +21,7 @@ async function renderMovie() {
                 <p>${movie.description || "No description available."}</p>
                 <p><strong>Runtime:</strong> ${movie.runtimeMinutes} min</p>
                 <p><strong>Age limit:</strong> ${movie.ageLimit}</p>
+                <p><strong>Genre(s):</strong>${movie.categories.map(c => c.name).join(", ")}</p>
             </section>
             
 
