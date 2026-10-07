@@ -9,7 +9,7 @@ async function renderHome() {
         <select id="ddCategories">
             <option value="">All categories</option>
             ${categories.map(category => `
-                <option value="${category.id}">
+                <option value="${category.name}">
                     ${category.name}
                 </option>
             `).join("")}
@@ -26,14 +26,18 @@ async function renderHome() {
         selectMovie(Number(card.dataset.id));
     });
 
-    document.getElementById("ddCategories").addEventListener("change", (e) => {
-        const categoryId = e.target.value;
+    document.getElementById("ddCategories").addEventListener("change", async (e) => {
+        const category = e.target.value;
 
-        const filteredMovies = categoryId
-            ? state.movies.filter(movie =>
-                movie.categories.some(category => category.id == categoryId)
-            )
-            : state.movies;
+        if (!category) {
+            document.getElementById("movie-list").innerHTML =
+                state.movies.map(movieCard).join("");
+            return;
+        }
+
+        const filteredMovies = await apiGet(
+            `${state.apiBaseUrl}/api/movies/categories/${category}`
+        );
 
         document.getElementById("movie-list").innerHTML =
             filteredMovies.map(movieCard).join("");
