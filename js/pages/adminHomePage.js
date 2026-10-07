@@ -31,7 +31,10 @@ async function renderAdminHomePage() {
         if (!button) return;
         const id = Number(button.dataset.id);
 
-        if (button.dataset.action === "edit")   {  }
+        if (button.dataset.action === "edit")   {
+            state.selectedMovieId = id;
+            location.hash = "editMovie"
+        }
         if (button.dataset.action === "delete") { }
     });
 }
@@ -39,16 +42,18 @@ async function renderAdminHomePage() {
 function movieRow(movie) {
     return `
         <tr>
-            <td>${movie.id}</td>
+            <td id="movie-id">${movie.id}</td>
             <td>${movie.name}</td>
             <td>${movie.runtimeMinutes}</td>
             <td>${movie.ageLimit}</td>
             <td>${movie.active ? "Yes" : "No"}</td>
                
             <td>
-                <button data-action="edit"   data-id="${movie.id}">Edit</button>
+                <button id="edit-button" data-action="edit"   data-id="${movie.id}">Edit</button>
                 <button data-action="delete" data-id="${movie.id}">Delete</button>
             </td>
         </tr>
     `;
 }
+
+
