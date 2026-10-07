@@ -1,42 +1,54 @@
 async function renderAdminHomePage() {
-
-    const movies = await apiGet(`${state.apiBaseUrl}/api/movies`);
+    const movies = await apiGet (`${state.apiBaseUrl}/api/movies`);
     state.movies = movies;
 
     document.getElementById("app").innerHTML = `
-    <h1>All Movies<h1>
-    <select id="movie-list" class="movie-table">
-    ${movies.map(createMovieTable).join("")}
-    </select>
+        <h1>All Movies</h1>
+        <button id="create-movie-btn">Create new movie</button>
+        <table id="movie-table">
+            <thead>
+                <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Runtime Minutes</th>
+                <th>Age Limit</th>
+                <th>Is Active</th>
+                </tr>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                ${movies.map(movieRow).join("")}
+            </tbody>
+        </table>
     `;
 
-    // document.getElementById("movie-list").addEventListener("click", (e) =>{
-    //
-    // })
+    document.getElementById("create-movie-btn").addEventListener("click", () => {
+        location.hash = "admin_create";
+    });
+
+    document.getElementById("movie-table").addEventListener("click", (e) => {
+        const button = e.target.closest("button");
+        if (!button) return;
+        const id = Number(button.dataset.id);
+
+        if (button.dataset.action === "edit")   {  }
+        if (button.dataset.action === "delete") { }
+    });
 }
-    function createMovieTable(movies) {
-        const table = document.createElement("table");
 
-        const headerRow = table.insertRow();
-        {
-            for (const text of ["id", "name", "runTime", "ageLimit", "isActive", ""]) {
-                const th = document.createElement("th");
-                th.textContent = text;
-
-                headerRow.appendChild(th)
-            }
-            for (const movie of movies) {
-                const row = table.insertRow();
-
-                row.insertCell().textContent = movie.id;
-                row.insertCell().textContent = movie.movieName;
-                row.insertCell().textContent = movie.startTime.replace("T", " ");
-                row.insertCell().textContent = movie.theatreName;
-                row.insertCell().innerHTML = `<a href="#movie/${movie.id}">Book</a>`
-            }
-
-            return table;
-        }
-    }
-
-
+function movieRow(movie) {
+    return `
+        <tr>
+            <td>${movie.id}</td>
+            <td>${movie.name}</td>
+            <td>${movie.runtimeMinutes}</td>
+            <td>${movie.ageLimit}</td>
+            <td>${movie.active ? "Yes" : "No"}</td>
+               
+            <td>
+                <button data-action="edit"   data-id="${movie.id}">Edit</button>
+                <button data-action="delete" data-id="${movie.id}">Delete</button>
+            </td>
+        </tr>
+    `;
+}
