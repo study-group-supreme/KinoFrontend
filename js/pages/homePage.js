@@ -35,14 +35,11 @@ async function renderHome() {
             return;
         }
 
-        const filteredMovies = await apiGet(
-            `${state.apiBaseUrl}/api/movies/categories/${category}`
-        );
+        const movies = await apiGet(`${state.apiBaseUrl}/api/movies/categories/${category}`);
 
         document.getElementById("movie-list").innerHTML =
-            filteredMovies.map(movieCard).join("");
+            movies.map(movieCard).join("");
     });
-
 }
 
 function movieCard(movie) {
