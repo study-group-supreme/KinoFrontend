@@ -1,0 +1,5 @@
+.git/
+.idea/
+Dockerfile
+*.md
+project_context*.txt
