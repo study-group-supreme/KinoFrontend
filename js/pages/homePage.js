@@ -35,27 +35,34 @@ async function renderHome() {
             return;
         }
 
-        const movies = await apiGet(`${state.apiBaseUrl}/api/movies/categories/${category}`);
+        try {
+            const movies = await apiGet(`${state.apiBaseUrl}/api/movies/categories/${category}`);
 
-        document.getElementById("movie-list").innerHTML =
-            movies.map(movieCard).join("");
+            document.getElementById("movie-list").innerHTML =
+                movies.map(movieCard).join("");
+
+        } catch (error) {
+            document.getElementById("movie-list").innerHTML = `
+            <p>${error.message}</p>
+        `;
+        }
     });
 }
 
-function movieCard(movie) {
-    return `
+    function movieCard(movie) {
+        return `
         <article class="movie-card" data-id="${movie.id}">
                 <img src="${movie.posterUrl}" alt="Poster coming soon">
                 <h3>${movie.name}</h3>
         </article>
     `;
-}
+    }
 
-function selectMovie(id) {
-    state.selectedMovieId = id;
-    location.hash = "movie";
-}
+    function selectMovie(id) {
+        state.selectedMovieId = id;
+        location.hash = "movie";
+    }
 
-function switchAdmin() {
+    function switchAdmin() {
 
-}
+    }
