@@ -1,14 +1,16 @@
-//RenderPage
+// RenderPage
 async function renderReservation() {
     if (!state.selectedShowingId) {
         location.hash = "home";
         return;
     }
-//Hente sæder
+
+    // Hente sæder
     const seats = await apiGet(
         `${state.apiBaseUrl}/api/seat/showing/${state.selectedShowingId}`
     ) || [];
-//Lave html
+
+    // Lave html
     document.getElementById("app").innerHTML = `
         <h1>Reserve ticket</h1>
 
@@ -27,35 +29,43 @@ async function renderReservation() {
 
         <p id="message"></p>
     `;
-//Lytter til submit knap
+
+    // Lytter til submit knap
     document.getElementById("reserve-btn").addEventListener("click", submitReservation);
-//Lytter til back knap
+
+    // Lytter til back knap
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "movie";
     });
 }
 
-//Hvis sæde er available, kan sæde trykkes på og er grøn, hvis ikke modsat og rød
+// Et afkrydsningsfelt pr. sæde. Optagede sæder er disabled
 function seatItem(seat) {
-    let color = !seat.taken ? "available" : "reserved";
-    let btn = `
-        <button class="${color}" onclick="selectSeat(${seat.id})" ${seat.taken ? "disabled" : ""}>
-            ${seat.row}${seat.number}
-        </button>`
-    return btn;
-}
-
-//Gemmer sæde id i staten
-function selectSeat(id) {
-    state.selectedSeatId = id;
+    return `
+        <label class="seat">
+            <input type="checkbox" value="${seat.id}" ${seat.taken ? "disabled" : ""}>
+            <span>${seat.row}${seat.number}</span>
+        </label>
+    `;
 }
 
 async function submitReservation() {
     const message = document.getElementById("message");
-//Hvis der ikke har været et sæde gemt i state, skriv besked til bruger
-    if (!state.selectedSeatId) {
+
+    // Find de afkrydsede sæder. Hvis der ingen er, skriv besked til bruger
+    const checked = document.querySelectorAll("#seat-list input:checked");
+    if (checked.length === 0) {
         message.textContent = "Choose a seat.";
         return;
+    }
+
+    // Saml sæde-id'erne til en tekst som "1,2,3"
+    let seatIds = "";
+    for (const checkbox of checked) {
+        if (seatIds !== "") {
+            seatIds += ",";
+        }
+        seatIds += checkbox.value;
     }
 
     const reservation = {
@@ -63,9 +73,10 @@ async function submitReservation() {
         customerPhone: document.getElementById("customerPhone").value,
         customerMail: document.getElementById("customerMail").value
     };
-//Send reservation med post metode
+
+    // Send reservation med post metode
     const result = await apiPost(
-        `${state.apiBaseUrl}/api/reservation/${state.selectedShowingId}/${state.selectedSeatId}`,
+        `${state.apiBaseUrl}/api/reservation/${state.selectedShowingId}?seatIds=${seatIds}`,
         reservation
     );
 
@@ -74,7 +85,6 @@ async function submitReservation() {
         return;
     }
 
-    message.textContent = "Ticket reserved!";
-    state.selectedSeatId = null;
     await renderReservation();
+    document.getElementById("message").textContent = "Ticket reserved!";
 }
