@@ -25,7 +25,7 @@ function renderAdminCreateMovie() {
 
 
     document.getElementById("back-btn").addEventListener("click", () => {
-        location.hash = "adminHomePage";
+        location.hash = "admin_home";
     });
 
     document.getElementById("new-movie-form").addEventListener("submit", saveMovie);{

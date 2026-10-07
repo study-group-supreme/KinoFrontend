@@ -1,8 +1,8 @@
 function navigate(page) {
     if (page === "home") renderHome();
     if (page === "movie") renderMovie();
-    if (page === "admincreate") renderAdminCreateMovie();
-    if (page === "adminhome") renderAdminHomePage();
+    if (page === "admin_create") renderAdminCreateMovie();
+    if (page === "admin_home") renderAdminHomePage();
 
 
 }
