@@ -10,6 +10,7 @@ async function renderMovie() {
 
     document.getElementById("app").innerHTML = `
         <article class="movie-details">
+                    <button id="back-btn">Back</button>
             <header>
                 <h1>${movie.name}</h1>
             </header>
@@ -22,6 +23,7 @@ async function renderMovie() {
                 <p><strong>Age limit:</strong> ${movie.ageLimit}</p>
                 <p><strong>Genre(s):</strong>${movie.categories.map(c => c.name).join(", ")}</p>
             </section>
+            
 
             <section class="showings">
                 <h2>Showtimes</h2>
@@ -30,7 +32,7 @@ async function renderMovie() {
                 </ul>
             </section>
 
-            <button id="back-btn">Back</button>
+
         </article>
     `;
 
@@ -40,6 +42,7 @@ async function renderMovie() {
         selectShowing(Number(li.dataset.id));
     });
 
+
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "home";
     });
@@ -48,7 +51,9 @@ async function renderMovie() {
 function showingItem(showing) {
     return `
         <li class="showing-item" data-id="${showing.id}">
-            <button>Reserve ${showing.startTime}</button>
+            <p>
+                ${showing.startTime.replace("T", " ")}
+            </p>
         </li>
     `;
 }

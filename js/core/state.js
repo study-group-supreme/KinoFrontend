@@ -8,5 +8,7 @@ const state = {
     selectedShowingId: null,
     selectedSeatId: null,
     movies: [],
-    categories: []
+    categories: [],
+    ticketTypes: [],
+    selectedTicketTypeId: null
 };

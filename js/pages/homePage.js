@@ -55,3 +55,7 @@ function selectMovie(id) {
     state.selectedMovieId = id;
     location.hash = "movie";
 }
+
+function switchAdmin() {
+
+}
