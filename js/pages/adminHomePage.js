@@ -46,7 +46,7 @@ function movieRow(movie) {
             <td>${movie.name}</td>
             <td>${movie.runtimeMinutes}</td>
             <td>${movie.ageLimit}</td>
-            <td>${movie.active ? "Yes" : "No"}</td>
+            <td>${movie.isActive ? "Yes" : "No"}</td>
                
             <td>
                 <button id="edit-button" data-action="edit"   data-id="${movie.id}">Edit</button>
