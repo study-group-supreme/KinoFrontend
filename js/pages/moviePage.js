@@ -12,7 +12,7 @@ async function renderMovie() {
         <article class="movie-details">
                     <button id="back-btn">Back</button>
             <header>
-                <h1>${movie.name}</h1>
+                <h1 class="movie-name-head">${movie.name}</h1>
             </header>
 
             <section class="movie-info">
