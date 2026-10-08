@@ -228,3 +228,24 @@ tr{
 p{
     color: white;
 }
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select {
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #e8e8e8;
+    background: #1b2527;
+    border: 2px solid #b8902f;
+    border-radius: 8px;
+    padding: 0.5em 0.8em;
+}
+
+input::placeholder {
+    color: #8a9a9d;
+}
+
+input:hover,
+select:hover {
+    border-color: #e6c36a;
+}

@@ -17,9 +17,9 @@ async function renderReservation() {
     // Lave html
     document.getElementById("app").innerHTML = `
         <h1>Reserve ticket</h1>
-        <input id="customerName" placeholder="Name"><br>
-        <input id="customerPhone" placeholder="Phone"><br>
-        <input id="customerMail" placeholder="Email"><br>
+        <input required type="text" id="customerName" placeholder="Name"><br>
+        <input required type="tel" id="customerPhone" placeholder="Phone"><br>
+        <input required type="email" id="customerMail" placeholder="Email"><br>
 
 <select id="ticketType">
 ${ticketTypes.map(ticketTypeItem).join("")}
