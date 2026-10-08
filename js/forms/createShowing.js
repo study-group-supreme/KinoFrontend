@@ -11,7 +11,7 @@ async function renderAdminCreateShowing() {
             <select id="ddMovies">
                 <option value="">Select Movie</option>
                     ${movies.map(movies => `
-                <option value="${movies.name}">
+                <option value="${movies.id}">
                     ${movies.name}
                 </option>
                     `).join("")}
@@ -19,7 +19,7 @@ async function renderAdminCreateShowing() {
              <select id="ddTheatre">
          <option value="">Select Theatre</option>
         ${theatres.map(theatres => `
-                <option value="${theatres.name}">
+                <option value="${theatres.id}">
                     ${theatres.name}
                 </option>
             `).join("")}
@@ -61,8 +61,14 @@ async function saveShowing(event) {
 
     // 1. Read the form into an object, named exactly like the fields in Movie.java
     const showing = {
-        movieName: document.getElementById("ddMovies").value,
-        theatreName: document.getElementById("ddTheatre").value,
+        movie : {
+            id  : document.getElementById("ddMovies").value
+        },
+
+        theatre : {
+            id: document.getElementById("ddTheatre").value
+        },
+
         startTime: (document.getElementById("showing-startTime").value),
     };
 
@@ -75,9 +81,9 @@ async function saveShowing(event) {
 
     // 3. Success: go back to the list. Error: tell the user.
     if (response.ok) {
-        location.hash = "home";
+        location.hash = "admin_home";
     } else {
         document.getElementById("form-message").textContent =
-            "Could not save the movie. Did you fill in all required forms?";
+            "Could not save the showing. Did you fill in all required forms?";
     }
 }
