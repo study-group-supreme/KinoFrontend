@@ -64,14 +64,13 @@ h1, h2, h3 {
     padding: 2px;
     margin: 10px;
     cursor: pointer;
-    background-color: white;
+    background-color:#0b1a1c;
     width: max-content;
 }
 
 .showing-item:hover {
-    background-color: whitesmoke;
+    background-color: gray;
 }
-
 #seat-list {
     display: grid;
     grid-template-columns: repeat(12, 3rem);
