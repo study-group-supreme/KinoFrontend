@@ -37,3 +37,20 @@ async function apiPut(url, body){
         return null;
     }
 }
+async function apiDelete(url) {
+    try {
+        const response = await fetch(url, {method: "DELETE"});
+
+        const text = await response.text();
+
+        if (!response.ok) {
+            const json = JSON.parse(text);
+            return {error: json.error};
+        }
+
+        return null;
+
+    } catch (error) {
+        return {error: error.message};
+    }
+}

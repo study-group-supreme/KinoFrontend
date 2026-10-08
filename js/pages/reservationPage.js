@@ -16,17 +16,19 @@ async function renderReservation() {
 
     // Lave html
     document.getElementById("app").innerHTML = `
-        <h1>Reserve ticket</h1>
-        <input id="customerName" placeholder="Name"><br>
-        <input id="customerPhone" placeholder="Phone"><br>
-        <input id="customerMail" placeholder="Email"><br>
+<form
+        <h1 class="header">Reserve ticket</h1>
+        <br>
+        <input required type="text" id="customerName" placeholder="Name"><br>
+        <input required type="tel" id="customerPhone" placeholder="Phone"><br>
+        <input required type="email" id="customerMail" placeholder="Email"><br>
 
 <select id="ticketType">
 ${ticketTypes.map(ticketTypeItem).join("")}
 </select>
 
         <h2>Choose seat</h2>
-
+<div class="screen">SCREEN</div>
         <div id="seat-list">
             ${seats.map(seatItem).join("")}
         </div>
@@ -35,6 +37,7 @@ ${ticketTypes.map(ticketTypeItem).join("")}
         <button id="back-btn">Back</button>
 
         <p id="message"></p>
+        <form/>
     `;
 
     // Lytter til submit knap
