@@ -1,3 +1,10 @@
+function formatShowtime(isoString) {
+    return new Date(isoString).toLocaleString("en-GB", {
+        dateStyle: "short",
+        timeStyle: "short"
+    });
+}
+
 async function renderMovie() {
     const movie = state.movies.find(m => m.id === state.selectedMovieId);
 
@@ -48,11 +55,13 @@ async function renderMovie() {
     });
 }
 
+
+
 function showingItem(showing) {
     return `
         <li class="showing-item" data-id="${showing.id}">
             <p>
-                ${showing.startTime.replace("T", " ")}
+                ${formatShowtime((showing.startTime))}
             </p>
         </li>
     `;
