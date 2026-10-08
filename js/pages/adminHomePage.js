@@ -5,6 +5,8 @@ async function renderAdminHomePage() {
     document.getElementById("app").innerHTML = `
         <h1>All Movies</h1>
         <button id="create-movie-btn">Create new movie</button>
+                <button id="all-showings-btn">See all showings</button>
+
         <table id="movie-table">
             <thead>
                 <tr>
@@ -24,6 +26,10 @@ async function renderAdminHomePage() {
 
     document.getElementById("create-movie-btn").addEventListener("click", () => {
         location.hash = "admin_create";
+    });
+
+    document.getElementById("all-showings-btn").addEventListener("click", () => {
+        location.hash = "admin_showing";
     });
 
     document.getElementById("movie-table").addEventListener("click", (e) => {
@@ -51,7 +57,7 @@ function movieRow(movie) {
             <td>${movie.name}</td>
             <td>${movie.runtimeMinutes}</td>
             <td>${movie.ageLimit}</td>
-            <td>${movie.active ? "Yes" : "No"}</td>
+            <td>${movie.isActive ? "Yes" : "No"}</td>
                
             <td>
                 <button id="edit-button" data-action="edit"   data-id="${movie.id}">Edit</button>
