@@ -249,3 +249,6 @@ input:hover,
 select:hover {
     border-color: #e6c36a;
 }
+.header{
+    color: white;
+}
