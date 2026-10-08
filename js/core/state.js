@@ -10,5 +10,6 @@ const state = {
     movies: [],
     categories: [],
     ticketTypes: [],
+    showings: [],
     selectedTicketTypeId: null
 };
