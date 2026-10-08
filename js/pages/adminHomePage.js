@@ -1,10 +1,13 @@
 async function renderAdminHomePage() {
     const movies = await apiGet (`${state.apiBaseUrl}/api/movies`);
+    const showings = await apiGet(`${state.apiBaseUrl}/api/showing`)
     state.movies = movies;
+    state.showings = showings;
 
     document.getElementById("app").innerHTML = `
         <h1>All Movies</h1>
         <button id="create-movie-btn">Create new movie</button>
+        <button id="create-showing-btn">Create new showing</button>
         <table id="movie-table">
             <thead>
                 <tr>
@@ -24,7 +27,11 @@ async function renderAdminHomePage() {
 
     document.getElementById("create-movie-btn").addEventListener("click", () => {
         location.hash = "admin_create";
-    });
+    })
+    document.getElementById("create-showing-btn").addEventListener("click", () => {
+        location.hash = "admin_createShowing";
+    }
+    );
 
     document.getElementById("movie-table").addEventListener("click", (e) => {
         const button = e.target.closest("button");

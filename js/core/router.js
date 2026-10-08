@@ -5,6 +5,7 @@ function navigate(page) {
     if(page === "editMovie") renderEditMovieForm();
     if (page === "admin_create") renderAdminCreateMovie();
     if (page === "admin_home") renderAdminHomePage();
+    if (page === "admin_createShowing") renderAdminCreateShowing();
 
 
     if (page === "ticketType") renderTicketTypeSelection();
