@@ -7,7 +7,7 @@ async function renderHome() {
     document.getElementById("app").innerHTML = `
         <h1>Movies</h1>
         <select id="ddCategories">
-            <option value="">All categories</option>
+            <option value="">Sort by category</option>
             ${categories.map(category => `
                 <option value="${category.name}">
                     ${category.name}
