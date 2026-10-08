@@ -1,7 +1,7 @@
 async function renderAdminShowingPage() {
-    const showings = await apiGet(`${state.apiBaseUrl}/api/showing`);
+    const showings = await apiGet(`${state.apiBaseUrl}/api/showing` || []);
 
-    document.getElementById("app").innerText = `
+    document.getElementById("app").innerHTML = `
     <h1> All Showings </h1>
     <button id="back-btn"> back to home </button>
         <table>
@@ -14,7 +14,7 @@ async function renderAdminShowingPage() {
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>${showings.map(adminShowingRole).join("")}</tbody>
+            <tbody>${showings.map(adminShowingRow).join("")}</tbody>
         </table>
     `;
     document.getElementById("back-btn").addEventListener("click", () => {
