@@ -1,10 +1,18 @@
 async function apiGet(url) {
     try {
         const response = await fetch(url);
-        return await response.json();
+
+        if (!response.ok) {
+            const errorBody = await response.json();
+            throw new Error(
+                errorBody.message || `HTTP ${response.status}`
+            );
+        }
+
+        return response.json();
     } catch (error) {
         console.error("Fetch error:", error);
-        return null;
+        throw error;
     }
 }
 
