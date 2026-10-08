@@ -9,7 +9,7 @@ async function apiGet(url) {
             );
         }
 
-        return await response.json();
+        return response.json();
     } catch (error) {
         console.error("Fetch error:", error);
         throw error;
