@@ -13,8 +13,8 @@ async function renderAdminHomePage() {
                 <th>Runtime Minutes</th>
                 <th>Age Limit</th>
                 <th>Is Active</th>
-                </tr>
                 <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
                 ${movies.map(movieRow).join("")}
@@ -26,7 +26,7 @@ async function renderAdminHomePage() {
         location.hash = "admin_create";
     });
 
-    document.getElementById("movie-table").addEventListener("click", (e) => {
+    document.getElementById("movie-table").addEventListener("click", async (e) => {
         const button = e.target.closest("button");
         if (!button) return;
         const id = Number(button.dataset.id);
@@ -35,7 +35,17 @@ async function renderAdminHomePage() {
             state.selectedMovieId = id;
             location.hash = "editMovie"
         }
-        if (button.dataset.action === "delete") { }
+        if (button.dataset.action === "delete") {
+            const result = await apiDelete(`${state.apiBaseUrl}/api/movies/${id}`);
+
+            if (result?.error) {
+                alert(result.error);
+                return;
+            }
+
+            renderAdminHomePage();
+        }
+
     });
 }
 
@@ -49,7 +59,7 @@ function movieRow(movie) {
             <td>${movie.active ? "Yes" : "No"}</td>
                
             <td>
-                <button id="edit-button" data-action="edit"   data-id="${movie.id}">Edit</button>
+                <button id="edit-button" data-action="edit" data-id="${movie.id}">Edit</button>
                 <button data-action="delete" data-id="${movie.id}">Delete</button>
             </td>
         </tr>
