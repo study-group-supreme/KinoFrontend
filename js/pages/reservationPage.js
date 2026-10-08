@@ -16,7 +16,9 @@ async function renderReservation() {
 
     // Lave html
     document.getElementById("app").innerHTML = `
-        <h1>Reserve ticket</h1>
+<form
+        <h1 class="header">Reserve ticket</h1>
+        <br>
         <input required type="text" id="customerName" placeholder="Name"><br>
         <input required type="tel" id="customerPhone" placeholder="Phone"><br>
         <input required type="email" id="customerMail" placeholder="Email"><br>
@@ -35,6 +37,7 @@ ${ticketTypes.map(ticketTypeItem).join("")}
         <button id="back-btn">Back</button>
 
         <p id="message"></p>
+        <form/>
     `;
 
     // Lytter til submit knap
