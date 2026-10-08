@@ -34,14 +34,12 @@ async function renderAdminCreateShowing() {
 
 
     document.getElementById("ddMovies").addEventListener("change", async (e) => {
-        const movie = e.target.value;
-        return movie;
+        return e.target.value;
 
     });
 
     document.getElementById("ddTheatre").addEventListener("change",(e) => {
-        const theatre = e.target.value;
-        return theatre;
+        return e.target.value;
     })
 
 
