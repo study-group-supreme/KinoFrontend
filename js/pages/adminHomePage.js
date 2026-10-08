@@ -1,8 +1,9 @@
 async function renderAdminHomePage() {
-    const movies = await apiGet (`${state.apiBaseUrl}/api/movies`);
+    const movies = await apiGet(`${state.apiBaseUrl}/api/movies`);
     state.movies = movies;
 
     document.getElementById("app").innerHTML = `
+        <div id="error-box"></div>
         <h1>All Movies</h1>
         <button id="create-movie-btn">Create new movie</button>
         <table id="movie-table">
@@ -31,7 +32,7 @@ async function renderAdminHomePage() {
         if (!button) return;
         const id = Number(button.dataset.id);
 
-        if (button.dataset.action === "edit")   {
+        if (button.dataset.action === "edit") {
             state.selectedMovieId = id;
             location.hash = "editMovie"
         }
@@ -39,7 +40,7 @@ async function renderAdminHomePage() {
             const result = await apiDelete(`${state.apiBaseUrl}/api/movies/${id}`);
 
             if (result?.error) {
-                alert(result.error);
+                document.getElementById("error-box").innerText = result.error;
                 return;
             }
 
