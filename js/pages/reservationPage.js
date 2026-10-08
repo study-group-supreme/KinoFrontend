@@ -26,7 +26,7 @@ ${ticketTypes.map(ticketTypeItem).join("")}
 </select>
 
         <h2>Choose seat</h2>
-
+<div class="screen">SCREEN</div>
         <div id="seat-list">
             ${seats.map(seatItem).join("")}
         </div>
