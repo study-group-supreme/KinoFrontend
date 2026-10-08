@@ -1,17 +1,48 @@
-function renderAdminCreateShowing() {
+async function renderAdminCreateShowing() {
+    const movies = await apiGet(`${state.apiBaseUrl}/api/movies/available`);
+    const theatres = await apiGet(`${state.apiBaseUrl}/api/theatre/showAll`);
+    state.movies = movies;
+    state.theatres = theatres;
+
     document.getElementById("app").innerHTML = `
         <h1>New Showing</h1>
 
         <form id="new-showing-form">
-            <p><label>Movie shown <input id="movie-name" required></label></p>
-            <p><label>Theatre <textarea id="theatre-name" required></textarea></label></p>
-            <p><label>Starte Time <input id="showing-startTime" type="number" min="1" required></label></p>
-            <button type="submit">Save showing</button>
+            <select id="ddMovies">
+                <option value="">Select Movie</option>
+                    ${movies.map(movies => `
+                <option value="${movies.name}">
+                    ${movies.name}
+                </option>
+                    `).join("")}
+             </select>
+             <select id="ddTheatre">
+         <option value="">Select Theatre</option>
+        ${theatres.map(theatres => `
+                <option value="${theatres.name}">
+                    ${theatres.name}
+                </option>
+            `).join("")}
+             </select>
+             <p><label>Start Time <input id="showing-startTime" type="datetime-local" required></label></p>
+                 <button type="submit">Save showing</button>
         </form>
 
         <p id="form-message"></p>
             <button id="back-btn">Back</button>
     `;
+
+
+    document.getElementById("ddMovies").addEventListener("change", async (e) => {
+        const movie = e.target.value;
+        return movie;
+
+    });
+
+    document.getElementById("ddTheatre").addEventListener("change",(e) => {
+        const theatre = e.target.value;
+        return theatre;
+    })
 
 
 
@@ -24,21 +55,21 @@ function renderAdminCreateShowing() {
 
 
 }
+
 async function saveShowing(event) {
     event.preventDefault();   // stop the browser from reloading the page
 
     // 1. Read the form into an object, named exactly like the fields in Movie.java
     const showing = {
-        movieName: document.getElementById("movie-name").value,
-        theatreName: document.getElementById("theatre-name").value,
-        startTime: Number(document.getElementById("showing-startTime").value),
-        status: Number(document.getElementById("showing-status").value),
+        movieName: document.getElementById("ddMovies").value,
+        theatreName: document.getElementById("ddTheatre").value,
+        startTime: (document.getElementById("showing-startTime").value),
     };
 
     // 2. Send it to the backend as JSON
     const response = await fetch(`${state.apiBaseUrl}/api/showing`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(showing)
     });
 
