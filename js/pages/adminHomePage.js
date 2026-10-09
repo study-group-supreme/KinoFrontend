@@ -44,17 +44,6 @@ async function renderAdminHomePage() {
             location.hash = "editMovie"
         }
 
-        if (button.dataset.action === "delete") {
-            const result = await apiDelete(`${state.apiBaseUrl}/api/movies/${id}`);
-
-            if (result?.error) {
-                document.getElementById("error-box").innerText = result.error;
-                return;
-            }
-
-            await renderAdminHomePage();
-        }
-
         if(button.dataset.action === "tickets"){
             state.selectedMovieId = id;
             location.hash = "movieShowings"
@@ -73,7 +62,6 @@ function movieRow(movie) {
                
             <td>
                 <button id="edit-button" data-action="edit" data-id="${movie.id}">Edit</button>
-                <button data-action="delete" data-id="${movie.id}">Delete</button>
                 <button data-action="tickets" data-id="${movie.id}">All showings data</button>
             </td>
         </tr>

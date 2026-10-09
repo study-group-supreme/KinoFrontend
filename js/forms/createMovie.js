@@ -55,7 +55,7 @@ async function saveMovie(event) {
 
     // 3. Success: go back to the list. Error: tell the user.
     if (response.ok) {
-        location.hash = "home";
+        location.hash = "admin_home";
     } else {
         document.getElementById("form-message").textContent =
             "Could not save the movie. Did you fill in title, description and minutes?";
