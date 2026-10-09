@@ -88,14 +88,14 @@ label {
     margin-bottom: 12px;
 }
 
-.footer{
-    color: white;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    margin: 250px;
-    text-align: center;
-}
+/*.footer{*/
+/*    color: white;*/
+/*    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;*/
+/*    font-size: 0.875rem;*/
+/*    line-height: 1.5;*/
+/*    margin: 250px;*/
+/*    text-align: center;*/
+/*}*/
 .movie-name-head{
     color: white;
 }

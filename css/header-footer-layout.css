@@ -1,6 +1,12 @@
-footer {
+/* --- FOOTER: <footer class="footer"> in index.html --- */
+.footer {
     font-family: "Josefin Sans", sans-serif;
     font-weight: 700;
+    font-size: 0.875rem;
     letter-spacing: 0.06em;
-    color: #0b1a1c;
+    line-height: 1.5;
+    color: #8a9a9d;
+    text-align: center;
+    max-width: 600px;
+    margin: 120px auto 40px;
 }
