@@ -136,6 +136,5 @@ async function submitReservation() {
         return;
     }
 
-    await renderReservation();
-    document.getElementById("message").textContent = "Ticket reserved!";
+    location.hash = "home";
 }
