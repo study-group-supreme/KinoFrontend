@@ -225,11 +225,12 @@ select {
     color-scheme: dark; /* This makes the browser's own icons light */
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder{
     color: #8a9a9d;
 }
 
 input:hover,
+textarea:hover
 select:hover {
     border-color: #e6c36a;
 }
