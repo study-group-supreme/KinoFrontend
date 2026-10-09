@@ -14,6 +14,8 @@ async function renderReservation() {
         `${state.apiBaseUrl}/api/ticketType`
     ) || [];
 
+    const grouped = groupSeatsByRow(seats);
+
     // Lave html
     document.getElementById("app").innerHTML = `
 <form
@@ -28,10 +30,27 @@ ${ticketTypes.map(ticketTypeItem).join("")}
 </select>
 
         <h2>Choose seat</h2>
-<div class="screen">SCREEN</div>
-        <div id="seat-list">
-            ${seats.map(seatItem).join("")}
-        </div>
+    <div class="screen">SCREEN</div>
+
+    <div id="seat-rows">
+        ${(() => {
+        let html = "";
+
+        for (const row in grouped) {
+            const seatsInRow = grouped[row];
+
+            html += `
+            <div class="seat-row">
+                <div class="row-seats">
+                    ${seatsInRow.map(seatItem).join("")}
+                </div>
+            </div>
+        `;
+        }
+
+        return html;
+    })()}
+    </div>
 
         <button id="reserve-btn">Reserve</button>
         <button id="back-btn">Back</button>
@@ -49,6 +68,19 @@ ${ticketTypes.map(ticketTypeItem).join("")}
     });
 }
 
+function groupSeatsByRow(seats) {
+    const rows = {};
+
+    for (const seat of seats) {
+        if (!rows[seat.row]) {
+            rows[seat.row] = [];
+        }
+        rows[seat.row].push(seat);
+    }
+
+    return rows;
+}
+
 //Sæde checkbox = checked. Sætter den til grøn med css. Sæde der er checked bliver reserveret bliver den sat til disable
 function seatItem(seat) {
     return `
@@ -58,6 +90,7 @@ function seatItem(seat) {
         </label>
     `;
 }
+
 function ticketTypeItem(ticketType) {
     return `
         <option value="${ticketType.id}">
@@ -71,7 +104,7 @@ async function submitReservation() {
     const ticketTypeId = document.getElementById("ticketType").value;
 
     // Find de afkrydsede sæder. Hvis der ingen er, skriv besked til bruger
-    const checked = document.querySelectorAll("#seat-list input:checked");
+    const checked = document.querySelectorAll("#seat-rows input:checked");
     if (checked.length === 0) {
         message.textContent = "Choose a seat.";
         return;
