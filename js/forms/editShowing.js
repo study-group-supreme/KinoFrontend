@@ -40,7 +40,7 @@ async function renderEditShowingForm(){
     document.getElementById("showing-start-time").value = showing.startTime;
 
     document.getElementById("back-btn").addEventListener("click", () => {
-        location.hash = "admin_home";
+        location.hash = "admin_showing";
     });
 
     document.getElementById("edit-showing-form").addEventListener("submit", updateShowing)
@@ -58,7 +58,7 @@ async function updateShowing(event){
     const result = await apiPut(`${state.apiBaseUrl}/api/showing/${state.selectedShowingId}`, updatedShowing);
 
     if (result){
-        location.hash = "admin_home";
+        location.hash = "admin_showing";
     } else {
         document.getElementById("form-message").textContent = "Could not update showing";
     }

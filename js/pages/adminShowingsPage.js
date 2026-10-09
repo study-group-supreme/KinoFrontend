@@ -37,6 +37,7 @@ async function renderAdminShowingPage() {
                     <th>Theater</th>
                     <th>Start Time</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="showing-rows"></tbody>
@@ -65,6 +66,7 @@ function adminShowingRow(showing) {
         <td>${showing.theatreName}</td>
         <td>${showing.startTime.replace("T", " ")}</td>
         <td>${isPast ? "Past" : "Upcoming"}</td>
+        <td><button class="edit-showing-btn" data-id="${showing.id}" >Edit Showing</button></td>
     </tr>
 `;
 }
@@ -86,4 +88,11 @@ function applyShowingFilters(){
 
     document.getElementById("showing-rows").innerHTML = filtered.length ? filtered.map(adminShowingRow).join("") :
         `<tr><td colspan="5">No showings match</td></tr>`;
+
+    document.querySelectorAll(".edit-showing-btn").forEach(button => {
+        button.addEventListener("click", () =>{
+            state.selectedShowingId = Number(button.dataset.id);
+            location.hash = "editShowing";
+        });
+    });
 }

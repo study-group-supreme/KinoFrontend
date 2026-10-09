@@ -12,6 +12,7 @@ function navigate(page) {
     if (page === "movieShowings") renderShowingsPage();
     if(page === "showingTickets") renderShowingTicketsPage();
     if (page === "ticketType") renderTicketTypeSelection();
+    if (page === "editShowing") renderEditShowingForm();
 }
 
 function router() {
