@@ -14,7 +14,7 @@ async function renderMovie() {
             <ul class="showing-date-list">
                 ${group.showings.map(s => `
                     <li class="showing-item" data-id="${s.id}">
-                        ${s.startTime.split("T")[1]}
+                        ${s.startTime.split("T")[1].slice(0,5)}
                     </li>
                 `).join("")}
             </ul>

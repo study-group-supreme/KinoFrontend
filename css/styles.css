@@ -61,31 +61,35 @@ h1, h2, h3 {
 }
 
 .showing-item {
-    padding: 2px;
+    padding: 4px 10px;
     margin: 10px;
     cursor: pointer;
-    background-color:#0b1a1c;
+    color: #e8e8e8;
+    background-color: #0b1a1c;
+    border-radius: 6px;
     width: max-content;
 }
 
 .showing-item:hover {
-    background-color: gray;
+    background-color: #2f3d40;
 }
 
-.movie-table{
-    text-align: center;
-}
 body{
    background-color: #0b1a1c;
-}
-.footer{
-    color: white;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 0.875rem;
+    color: #e8e8e8;
+    font-family: "Josefin Sans", system-ui, sans-serif;
     line-height: 1.5;
-    margin: 250px;
-    text-align: center;
 }
+
+label {
+    color: #e8e8e8;
+}
+
+#error-box {
+    color: #ff9b9b;
+    margin-bottom: 12px;
+}
+
 .movie-name-head{
     color: white;
 }
@@ -151,15 +155,18 @@ button:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center; /* moved from old rule */
     width: 36px;
     height: 34px;
     font-size: 0.65rem;
     color: #e8e8e8;
     background: #2f3d40;
     border-radius: 10px 10px 4px 4px;
-    border-bottom: 4px solid #1b2527;
+    border: 1px solid #888; /* moved from the old rule: thin grey out */
+    border-bottom: 4px solid #1b2527; /* must stay AFTER border */
     transition: transform 0.1s, background 0.15s;
 }
+
 .seat:hover span {
     transform: scale(1.1);
 }
@@ -188,15 +195,15 @@ button:focus-visible {
 table{
     color: white;
 }
-tr{
-    color: white;
-}
+
 p{
     color: white;
 }
-input[type="text"],
-input[type="email"],
-input[type="tel"],
+
+/* input:not part means "every input, except checkboxes and hidden fields */
+/* the seats are checkboxes, so they keep their own seat stay. The hidden movie-id field in the edit form stays invicible */
+input:not([type="checkbox"]):not([type="hidden"]),
+textarea,
 select {
     font-family: inherit;
     font-size: 0.95rem;
@@ -205,13 +212,15 @@ select {
     border: 2px solid #b8902f;
     border-radius: 8px;
     padding: 0.5em 0.8em;
+    color-scheme: dark; /* This makes the browser's own icons light */
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder{
     color: #8a9a9d;
 }
 
 input:hover,
+textarea:hover,
 select:hover {
     border-color: #e6c36a;
 }
@@ -237,3 +246,66 @@ select:hover {
     display: flex;
     gap: 6px;
 }
+
+.admin-table tbody tr:nth-child(even) td {
+    background: #1c3940;
+}
+
+.admin-table thead th {
+    position: sticky;
+    top: 0;
+    background: #0b1a1c;
+}
+
+.admin-table td,
+.admin-table th {
+    vertical-align: top;
+}
+
+.admin-table .movie-cell {
+    min-width: 200px;
+    line-height: 1.3;
+}
+
+/* --- TABLES (every table on the site) --- */
+
+table {
+    border-collapse: collapse;
+    color: #e8e8e8;
+    margin-top: 12px;
+}
+
+th, td {
+    padding: 8px 19px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    color: #e6c36a;
+    background: #0b1a1c;
+    border-bottom: 2px solid #b8902f;
+}
+
+tbody tr:nth-child(even) td {
+    background: #1c3940;
+}
+
+td button {
+    font-size: 0.8rem;
+    padding: 0.4em 0.9em;
+    margin: 2px 0;
+    white-space: nowrap;
+}
+
+.movie-cell {
+    min-width: 200px;
+    line-height: 1.3;
+}
+
+tr.past td {
+    opacity: 0.5;
+}
+

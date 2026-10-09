@@ -18,7 +18,7 @@ async function renderReservation() {
 
     // Lave html
     document.getElementById("app").innerHTML = `
-<form
+<form id="reservation-form">
         <h1 class="header">Reserve ticket</h1>
         <br>
         <input required type="text" id="customerName" placeholder="Name"><br>
@@ -52,16 +52,18 @@ ${ticketTypes.map(ticketTypeItem).join("")}
     })()}
     </div>
 
-        <button id="reserve-btn">Reserve</button>
-        <button id="back-btn">Back</button>
+        <button type="submit" id="reserve-btn">Reserve</button>
+        <button type="button" id="back-btn">Back</button>
 
         <p id="message"></p>
-        <form/>
+        </form>
     `;
 
-    // Lytter til submit knap
-    document.getElementById("reserve-btn").addEventListener("click", submitReservation);
-
+    // Lytter til formens submit: Reserve-knappen eller Enter i et felt
+    document.getElementById("reservation-form").addEventListener("submit", (event) => {
+        event.preventDefault();   // stop the browser from reloading the page
+        submitReservation();
+    });
     // Lytter til back knap
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "movie";
