@@ -44,16 +44,7 @@ async function renderAdminHomePage() {
             location.hash = "editMovie"
         }
 
-        if (button.dataset.action === "delete") {
-            const result = await apiDelete(`${state.apiBaseUrl}/api/movies/${id}`);
-
-            if (result?.error) {
-                document.getElementById("error-box").innerText = result.error;
-                return;
-            }
-
             await renderAdminHomePage();
-        }
 
         if(button.dataset.action === "tickets"){
             state.selectedMovieId = id;
