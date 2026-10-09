@@ -71,33 +71,33 @@ h1, h2, h3 {
 .showing-item:hover {
     background-color: gray;
 }
-#seat-list {
-    display: grid;
-    grid-template-columns: repeat(12, 3rem);
-    gap: 4px;
-}
+/*#seat-list {*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(12, 3rem);*/
+/*    gap: 4px;*/
+/*}*/
 
-.seat input {
-    display: none;
-}
+/*.seat input {*/
+/*    display: none;*/
+/*}*/
 
-.seat span {
-    display: block;
-    text-align: center;
-    border: 1px solid #888;
-    cursor: pointer;
-}
+/*.seat span {*/
+/*    display: block;*/
+/*    text-align: center;*/
+/*    border: 1px solid #888;*/
+/*    cursor: pointer;*/
+/*}*/
 
-.seat input:checked + span {
-    background: green;
-    color: white;
-}
+/*.seat input:checked + span {*/
+/*    background: green;*/
+/*    color: white;*/
+/*}*/
 
-.seat input:disabled + span {
-    background: red;
-    color: white;
-    cursor: not-allowed;
-}
+/*.seat input:disabled + span {*/
+/*    background: red;*/
+/*    color: white;*/
+/*    cursor: not-allowed;*/
+/*}*/
 
 .movie-table{
     text-align: center;
@@ -178,15 +178,18 @@ button:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center; /* moved from old rule */
     width: 36px;
     height: 34px;
     font-size: 0.65rem;
     color: #e8e8e8;
     background: #2f3d40;
     border-radius: 10px 10px 4px 4px;
-    border-bottom: 4px solid #1b2527;
+    border: 1px solid #888; /* moved from the old rule: thin grey out */
+    border-bottom: 4px solid #1b2527; /* must stay AFTER border */
     transition: transform 0.1s, background 0.15s;
 }
+
 .seat:hover span {
     transform: scale(1.1);
 }
@@ -269,7 +272,7 @@ select:hover {
 }
 
 .admin-table .movie-cell {
-    min-with: 200px;
+    min-width: 200px;
     line-height: 1.3;
 }
 
