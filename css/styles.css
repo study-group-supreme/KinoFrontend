@@ -61,15 +61,17 @@ h1, h2, h3 {
 }
 
 .showing-item {
-    padding: 2px;
+    padding: 4px 10px;
     margin: 10px;
     cursor: pointer;
-    background-color:#0b1a1c;
+    color: #e8e8e8;
+    background-color: #0b1a1c;
+    border-radius: 6px;
     width: max-content;
 }
 
 .showing-item:hover {
-    background-color: gray;
+    background-color: #2f3d40;
 }
 
 body{
