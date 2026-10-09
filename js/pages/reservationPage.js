@@ -18,7 +18,7 @@ async function renderReservation() {
 
     // Lave html
     document.getElementById("app").innerHTML = `
-<form
+<form id="reservation-form">
         <h1 class="header">Reserve ticket</h1>
         <br>
         <input required type="text" id="customerName" placeholder="Name"><br>
