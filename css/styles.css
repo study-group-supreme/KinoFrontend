@@ -71,33 +71,6 @@ h1, h2, h3 {
 .showing-item:hover {
     background-color: gray;
 }
-#seat-list {
-    display: grid;
-    grid-template-columns: repeat(12, 3rem);
-    gap: 4px;
-}
-
-.seat input {
-    display: none;
-}
-
-.seat span {
-    display: block;
-    text-align: center;
-    border: 1px solid #888;
-    cursor: pointer;
-}
-
-.seat input:checked + span {
-    background: green;
-    color: white;
-}
-
-.seat input:disabled + span {
-    background: red;
-    color: white;
-    cursor: not-allowed;
-}
 
 .movie-table{
     text-align: center;
@@ -212,13 +185,6 @@ button:focus-visible {
 .seat:has(input:disabled):hover span {
     transform: none;
 }
-#seat-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    width: 530px;
-    margin: 0 auto 2rem;
-}
 table{
     color: white;
 }
@@ -251,4 +217,23 @@ select:hover {
 }
 .header{
     color: white;
+}
+
+#seat-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 auto;
+    width: max-content;
+}
+
+.seat-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.row-seats {
+    display: flex;
+    gap: 6px;
 }
