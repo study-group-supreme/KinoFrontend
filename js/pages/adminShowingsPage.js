@@ -29,7 +29,7 @@ async function renderAdminShowingPage() {
     
     
     
-        <table id="movie-table" class="admin-table">
+        <table class="admin-table">
             <thead>
                 <tr>
                     <th>Id</th>
