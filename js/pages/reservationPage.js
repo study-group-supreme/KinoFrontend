@@ -56,7 +56,7 @@ ${ticketTypes.map(ticketTypeItem).join("")}
         <button id="back-btn">Back</button>
 
         <p id="message"></p>
-        <form/>
+        </form>
     `;
 
     // Lytter til submit knap
