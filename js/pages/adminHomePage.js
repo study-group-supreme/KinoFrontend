@@ -17,8 +17,8 @@ async function renderAdminHomePage() {
                 <th>Runtime Minutes</th>
                 <th>Age Limit</th>
                 <th>Is Active</th>
-                </tr>
                 <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
                 ${movies.map(movieRow).join("")}
