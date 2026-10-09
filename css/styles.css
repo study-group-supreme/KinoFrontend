@@ -210,9 +210,10 @@ table{
 p{
     color: white;
 }
-input[type="text"],
-input[type="email"],
-input[type="tel"],
+
+/* input:not part means "every input, except checkboxes and hidden fields */
+/* the seats are checkboxes, so they keep their own seat styy. The hidden movie-id field in the edit form stays invicible */
+input:not([type="checkbox"]):not([type="hidden"]),
 select {
     font-family: inherit;
     font-size: 0.95rem;
@@ -221,6 +222,7 @@ select {
     border: 2px solid #b8902f;
     border-radius: 8px;
     padding: 0.5em 0.8em;
+    color-scheme: dark; /* This makes the browser's own icons light */
 }
 
 input::placeholder {
