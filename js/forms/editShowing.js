@@ -1,8 +1,8 @@
-async function renderEditShowingForm(){
+async function renderEditShowingForm() {
     const movies = await apiGet(`${state.apiBaseUrl}/api/movies/available`);
     const theatres = await apiGet(`${state.apiBaseUrl}/api/theatre/showAll`);
     const showing = await apiGet(`${state.apiBaseUrl}/api/showing/${state.selectedShowingId}`);
-    if(!showing){
+    if (!showing) {
         location.hash = "home"
         return;
     }
@@ -46,20 +46,19 @@ async function renderEditShowingForm(){
     document.getElementById("edit-showing-form").addEventListener("submit", updateShowing)
 }
 
-async function updateShowing(event){
+async function updateShowing(event) {
     event.preventDefault();
 
     const updatedShowing = {
-        movie: { id: Number(document.getElementById("ddMovies").value) },
-        theatre: { id: Number(document.getElementById("ddTheatre").value) },
+        movie: {id: Number(document.getElementById("ddMovies").value)},
+        theatre: {id: Number(document.getElementById("ddTheatre").value)},
         startTime: document.getElementById("showing-start-time").value
     };
 
-    const result = await apiPut(`${state.apiBaseUrl}/api/showing/${state.selectedShowingId}`, updatedShowing);
-
-    if (result){
-        location.hash = "admin_showing";
-    } else {
-        document.getElementById("form-message").textContent = "Could not update showing";
+    try {
+        await apiPut(`${state.apiBaseUrl}/api/showing/${state.selectedShowingId}`, updatedShowing);
+        location.hash = "admin_showing"
+    } catch (error) {
+        document.getElementById("form-message").textContent = error.message;
     }
 }
