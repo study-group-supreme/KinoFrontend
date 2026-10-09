@@ -1,10 +1,3 @@
-function formatShowtime(isoString) {
-    return new Date(isoString).toLocaleString("en-GB", {
-        dateStyle: "short",
-        timeStyle: "short"
-    });
-}
-
 async function renderMovie() {
     const movie = state.movies.find(m => m.id === state.selectedMovieId);
 
@@ -13,11 +6,25 @@ async function renderMovie() {
         return;
     }
 
-    const showings = await apiGet(`${state.apiBaseUrl}/api/showing/movie/${state.selectedMovieId}`) || [];
+    const groups = await apiGet(`${state.apiBaseUrl}/api/showing/movie/${state.selectedMovieId}/grouped`) || [];
+
+    const groupedHtml = groups.map(group => `
+        <section class="showing-date-group">
+            <h3>${group.date}</h3>
+            <ul class="showing-date-list">
+                ${group.showings.map(s => `
+                    <li class="showing-item" data-id="${s.id}">
+                        ${s.startTime.split("T")[1]}
+                    </li>
+                `).join("")}
+            </ul>
+        </section>
+    `).join("");
 
     document.getElementById("app").innerHTML = `
         <article class="movie-details">
-                    <button id="back-btn">Back</button>
+            <button id="back-btn">Back</button>
+
             <header>
                 <h1 class="movie-name-head">${movie.name}</h1>
             </header>
@@ -28,43 +35,25 @@ async function renderMovie() {
                 <p>${movie.description || "No description available."}</p>
                 <p><strong>Runtime:</strong> ${movie.runtimeMinutes} min</p>
                 <p><strong>Age limit:</strong> ${movie.ageLimit}</p>
-                <p><strong>Genre(s):</strong>${movie.categories.map(c => c.name).join(", ")}</p>
+                <p><strong>Genre(s):</strong> ${movie.categories.map(c => c.name).join(", ")}</p>
             </section>
-            
 
-            <section class="showings">
+            <section class="showings" id="showings-container">
                 <h2>Showtimes</h2>
-                <ul id="showing-list">
-                    ${showings.map(showingItem).join("")}
-                </ul>
+                ${groupedHtml}
             </section>
-
-
         </article>
     `;
 
-    document.getElementById("showing-list").addEventListener("click", (e) => {
+    document.getElementById("showings-container").addEventListener("click", (e) => {
         const li = e.target.closest("li[data-id]");
         if (!li) return;
         selectShowing(Number(li.dataset.id));
     });
 
-
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "home";
     });
-}
-
-
-
-function showingItem(showing) {
-    return `
-        <li class="showing-item" data-id="${showing.id}">
-            <p>
-                ${formatShowtime((showing.startTime))}
-            </p>
-        </li>
-    `;
 }
 
 function selectShowing(id) {

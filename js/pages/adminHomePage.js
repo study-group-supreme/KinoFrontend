@@ -1,5 +1,5 @@
 async function renderAdminHomePage() {
-    const movies = await apiGet(`${state.apiBaseUrl}/api/movies`);
+    const movies = await apiGet (`${state.apiBaseUrl}/api/movies`);
     state.movies = movies;
 
     document.getElementById("app").innerHTML = `
@@ -17,8 +17,8 @@ async function renderAdminHomePage() {
                 <th>Runtime Minutes</th>
                 <th>Age Limit</th>
                 <th>Is Active</th>
-                <th>Actions</th>
                 </tr>
+                <th>Actions</th>
             </thead>
             <tbody>
                 ${movies.map(movieRow).join("")}
@@ -92,6 +92,7 @@ async function renderShowingsPage() {
     document.getElementById("app").innerHTML = `
         <h1>Showings for ${movie.name}</h1>
         <button id="back-btn">Back</button>
+        <button id="create-showing-btn">Create new showing</button>
         <ul id="showing-list">
             ${showings.map(s => `
                 <li>
@@ -105,6 +106,11 @@ async function renderShowingsPage() {
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "admin_home";
     });
+
+    document.getElementById("create-showing-btn").addEventListener("click", () => {
+            location.hash = "admin_createShowing";
+        }
+    );
 
     document.getElementById("showing-list").addEventListener("click", async (e) => {
         const button = e.target.closest("button");

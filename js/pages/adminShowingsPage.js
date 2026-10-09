@@ -5,6 +5,7 @@ async function renderAdminShowingPage() {
     document.getElementById("app").innerHTML = `
     <h1> All Showings </h1>
     <button id="back-btn"> back to home/movies </button>
+    <button id="create-showing-btn">Create new showing</button>
     
     <label>Show
         <select id="time-filter">
@@ -44,6 +45,9 @@ async function renderAdminShowingPage() {
 
     document.getElementById("time-filter").addEventListener("change", applyShowingFilters);
     document.getElementById("movie-filter").addEventListener("change", applyShowingFilters);
+    document.getElementById("create-showing-btn").addEventListener("click",() => {
+        location.hash = "admin_createShowing"
+    })
     document.getElementById("back-btn").addEventListener("click", () => {
         location.hash = "admin_home";
     });
