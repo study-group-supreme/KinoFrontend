@@ -196,13 +196,6 @@ button:focus-visible {
 .seat:has(input:disabled):hover span {
     transform: none;
 }
-#seat-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    width: 530px;
-    margin: 0 auto 2rem;
-}
 table{
     color: white;
 }
@@ -212,8 +205,9 @@ p{
 }
 
 /* input:not part means "every input, except checkboxes and hidden fields */
-/* the seats are checkboxes, so they keep their own seat styy. The hidden movie-id field in the edit form stays invicible */
+/* the seats are checkboxes, so they keep their own seat stay. The hidden movie-id field in the edit form stays invicible */
 input:not([type="checkbox"]):not([type="hidden"]),
+textarea,
 select {
     font-family: inherit;
     font-size: 0.95rem;
@@ -230,12 +224,31 @@ input::placeholder, textarea::placeholder{
 }
 
 input:hover,
-textarea:hover
+textarea:hover,
 select:hover {
     border-color: #e6c36a;
 }
 .header{
     color: white;
+}
+
+#seat-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 auto;
+    width: max-content;
+}
+
+.seat-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.row-seats {
+    display: flex;
+    gap: 6px;
 }
 
 .admin-table tbody tr:nth-child(even) td {

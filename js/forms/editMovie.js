@@ -20,6 +20,7 @@ async function renderEditMovieForm() {
                 </select>
         </label></p>
         <button type="submit">Update details</button>
+        <button type="button" id="delete-btn">Delete movie</button>
     </form>
     <p id="form-message"></p>
     <button id="back-btn">Back</button>
@@ -38,9 +39,24 @@ async function renderEditMovieForm() {
     });
 
     document.getElementById("edit-movie-form").addEventListener("submit", updateMovie)
+
+    document.getElementById("delete-btn").addEventListener("click", async () =>   {
+        if (!confirm("Delete this movie permanently?")) return;
+
+        const result = await apiDelete(`${state.apiBaseUrl}/api/movies/${state.selectedMovieId}`);
+
+        if (result?.error) {
+            document.getElementById("form-message").textContent = result.error;
+            return;
+        }
+
+        location.hash = "admin_home";
+
+    });
+
 }
 
-async function updateMovie(event){
+async function updateMovie(event) {
     event.preventDefault();
 
     const updatedMovie = {
@@ -54,7 +70,7 @@ async function updateMovie(event){
 
     const result = await apiPut(`${state.apiBaseUrl}/api/movies/${state.selectedMovieId}`, updatedMovie);
 
-    if (result){
+    if (result) {
         location.hash = "admin_home";
     } else {
         document.getElementById("form-message").textContent = "Could not update movie";
