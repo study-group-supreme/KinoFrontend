@@ -28,7 +28,7 @@ async function renderAdminShowingPage() {
     
     
     
-        <table>
+        <table id="movie-table" class="admin-table">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -57,7 +57,7 @@ function adminShowingRow(showing) {
     return `
     <tr class="${isPast ? "past" : ""}">
         <td>${showing.id}</td>
-        <td>${showing.movieName}</td>
+        <td class="movie-cell" title="${showing.movieName}">${showing.movieName}</td>
         <td>${showing.theatreName}</td>
         <td>${showing.startTime.replace("T", " ")}</td>
         <td>${isPast ? "Past" : "Upcoming"}</td>
