@@ -44,8 +44,6 @@ async function renderAdminHomePage() {
             location.hash = "editMovie"
         }
 
-            await renderAdminHomePage();
-
         if(button.dataset.action === "tickets"){
             state.selectedMovieId = id;
             location.hash = "movieShowings"
@@ -64,7 +62,6 @@ function movieRow(movie) {
                
             <td>
                 <button id="edit-button" data-action="edit" data-id="${movie.id}">Edit</button>
-                <button data-action="delete" data-id="${movie.id}">Delete</button>
                 <button data-action="tickets" data-id="${movie.id}">All showings data</button>
             </td>
         </tr>
